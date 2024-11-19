@@ -91,6 +91,11 @@ async def send_with_retries(user_id, retries=3, timeout=10):
     return "Timeout"
 
 # Маршрут для верификации ID через Telegram
+
+@app.route('/verify-id', methods=['OPTIONS'])
+async def handle_options():
+    return '', 204  # Пустой ответ с кодом 204 (No Content)
+
 @app.route('/verify-id', methods=['POST'])
 async def verify_id():
     try:
