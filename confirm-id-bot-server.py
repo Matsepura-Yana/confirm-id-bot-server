@@ -7,9 +7,13 @@ import asyncio
 import re
 import os
 from dotenv import load_dotenv
+from hypercorn.config import Config
 
 # Логирование
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
+
+config = Config()
+config.bind = [f"0.0.0.0:{os.getenv('PORT', 5000)}"]
 
 load_dotenv()
 
@@ -92,9 +96,9 @@ async def send_with_retries(user_id, retries=3, timeout=10):
 
 # Маршрут для верификации ID через Telegram
 
-@app.route('/verify-id', methods=['OPTIONS'])
-async def handle_options():
-    return '', 204  # Пустой ответ с кодом 204 (No Content)
+@app.route('/')
+async def home():
+    return "Application is running"
 
 @app.route('/verify-id', methods=['POST'])
 async def verify_id():
