@@ -20,7 +20,7 @@ bot_username = os.getenv("TELEGRAM_BOT_USERNAME")
 
 # Инициализация приложения Quart
 app = Quart(__name__)
-app = cors(app)
+app = cors(app, allow_origin="*")  # Разрешаем запросы с любых источников
 
 # Инициализация Telegram-клиента
 client = TelegramClient("session_name", api_id, api_hash)
