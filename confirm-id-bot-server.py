@@ -83,17 +83,6 @@ async def send_to_telegram(user_id, timeout=10):
         logging.error(f"Ошибка при обработке сообщения: {e}")
         return f"Error: {str(e)}"
 
-# Функция с повторными попытками
-async def send_with_retries(user_id, retries=3, timeout=10):
-    for attempt in range(retries):
-        logging.info(f"Попытка {attempt + 1} из {retries} для User ID: {user_id}")
-        response = await send_to_telegram(user_id, timeout)
-        if response != "Timeout":
-            return response
-        logging.warning(f"Попытка {attempt + 1} не удалась, пробую снова...")
-
-    return "Timeout"
-
 # Маршрут для верификации ID через Telegram
 
 @app.route('/')
